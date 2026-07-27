@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onSelectSample, onStartClick }) => {
   return (
-    <div className="relative overflow-hidden glass-panel p-8 sm:p-12 mb-8 shadow-2xl border border-slate-200/80 dark:border-white/15 backdrop-blur-2xl">
+    <div className="relative overflow-hidden glass-panel p-5 sm:p-12 mb-8 shadow-2xl border border-slate-200/80 dark:border-white/15 backdrop-blur-2xl">
       {/* Background Subtle Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f115_1px,transparent_1px),linear-gradient(to_bottom,#6366f115_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />

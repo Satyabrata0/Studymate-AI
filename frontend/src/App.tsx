@@ -77,7 +77,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen mesh-bg text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200 relative selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen max-w-full overflow-x-hidden mesh-bg text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200 relative selection:bg-indigo-500 selection:text-white">
       {/* Background glow ornaments */}
       <div className="fixed top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 dark:bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="fixed bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-600/15 rounded-full blur-[120px] pointer-events-none -z-10" />

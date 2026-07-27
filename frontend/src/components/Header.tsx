@@ -22,32 +22,32 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Logo */}
         <div 
           onClick={() => setActiveTab("simplify")}
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-2 sm:gap-3 cursor-pointer group shrink-0"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform border border-white/20">
-            <GraduationCap className="w-6 h-6" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform border border-white/20">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="font-bold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white">
                 StudyMate<span className="text-indigo-600 dark:text-indigo-400">.AI</span>
               </span>
-              <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
+              <span className="hidden sm:inline-flex text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                 Gemini 3.6
               </span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 hidden sm:block">
+            <p className="text-xs text-slate-600 dark:text-slate-400 hidden md:block">
               AI Study Assistant & Exam Tutor
             </p>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <nav className="flex items-center gap-1 sm:gap-2 bg-slate-200/70 dark:bg-white/5 backdrop-blur-md p-1.5 rounded-2xl border border-slate-300 dark:border-white/10">
+        <nav className="flex items-center gap-1 sm:gap-2 bg-slate-200/70 dark:bg-white/5 backdrop-blur-md p-1 sm:p-1.5 rounded-2xl border border-slate-300 dark:border-white/10 shrink-0">
           <button
             id="tab-simplify-btn"
             onClick={() => setActiveTab("simplify")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
               activeTab === "simplify"
                 ? "bg-white dark:bg-indigo-600/30 border border-slate-300 dark:border-indigo-500/40 text-indigo-950 dark:text-white shadow-sm font-bold"
                 : "text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/5"
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="tab-tutor-btn"
             onClick={() => setActiveTab("tutor")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all relative ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all relative ${
               activeTab === "tutor"
                 ? "bg-white dark:bg-indigo-600/30 border border-slate-300 dark:border-indigo-500/40 text-indigo-950 dark:text-white shadow-sm font-bold"
                 : "text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/5"
@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="tab-quiz-btn"
             onClick={() => setActiveTab("quiz")}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all relative ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all relative ${
               activeTab === "quiz"
                 ? "bg-white dark:bg-indigo-600/30 border border-slate-300 dark:border-indigo-500/40 text-indigo-950 dark:text-white shadow-sm font-bold"
                 : "text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-white/5"
