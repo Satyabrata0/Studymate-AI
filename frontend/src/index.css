@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  /* Light Mode default mesh background */
+  .mesh-bg {
+    background-color: #f1f5f9;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(230,85%,92%,1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(260,85%,92%,1) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(330,85%,92%,1) 0, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(210,85%,92%,1) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(240,85%,93%,1) 0, transparent 50%);
+    color: #020617;
+  }
+
+  /* Dark Mode mesh background when html has .dark class */
+  .dark .mesh-bg {
+    background-color: #0f172a;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(225,39%,30%,1) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(253,16%,7%,1) 0, transparent 50%);
+    color: #f8fafc;
+  }
+
+  /* Light mode frosted panel */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    color: #020617;
+  }
+
+  /* Dark mode frosted panel */
+  .dark .glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+    color: #f8fafc;
+  }
+
+  /* Light mode frosted card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(203, 213, 225, 0.7);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    color: #020617;
+  }
+
+  /* Dark mode frosted card */
+  .dark .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+    color: #f8fafc;
+  }
+
+  /* Light mode input */
+  .glass-input {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    color: #020617;
+  }
+
+  /* Dark mode input */
+  .dark .glass-input {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #f8fafc;
+  }
+}
+
+/* Custom scrollbars for glass theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
