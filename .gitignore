@@ -8,6 +8,8 @@ coverage/
 *.log
 .env*
 !.env.example
+*.zip
+
 
 *.env
 

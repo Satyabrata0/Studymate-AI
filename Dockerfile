@@ -1,15 +1,17 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Copy package definitions and install production dependencies
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production --legacy-peer-deps || npm install --only=production
+# Copy package management files
+COPY package*.json ./
 
-# Copy compiled production dist directory
+# Install production dependencies cleanly
+RUN npm install --omit=dev --no-audit
+
+# Copy production bundle
 COPY dist ./dist
 
 EXPOSE 3000
