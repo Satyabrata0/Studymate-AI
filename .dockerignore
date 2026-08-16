@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+*.env
+studyAI.env
+backend/*.env
+.vscode
+*.md
+generate_docs.js
+generate_master_doc.js
+StudyMate_AI_*.pdf
