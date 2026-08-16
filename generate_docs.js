@@ -2,7 +2,7 @@ import PDFDocument from "pdfkit";
 import fs from "fs";
 import path from "path";
 
-const BEANSTALK_URL = "http://Studymate-AI-env.eba-6yuyfhhu.ap-southeast-2.elasticbeanstalk.com";
+const BEANSTALK_URL = "http://studymate-ai-prod-env.eba-6yuyfhhu.ap-southeast-2.elasticbeanstalk.com";
 
 function createConceptNote() {
   const doc = new PDFDocument({ margin: 50, size: "A4" });
@@ -24,9 +24,9 @@ function createConceptNote() {
      .font("Helvetica")
      .text("Vibe Coding Masterclass Series | IBM & Bharat Cares", 50, 60);
 
-  doc.fontSize(10)
+  doc.fontSize(9)
      .font("Helvetica-Oblique")
-     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 82);
+     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 84);
 
   let y = 130;
 
@@ -67,7 +67,7 @@ function createConceptNote() {
 
   // 5. Containerization & Cloud Deployment
   addSectionHeader("5. Docker Containerization & AWS Architecture");
-  addParagraph(null, `• Containerization: Application containerized via multi-stage Dockerfile (Node.js 20 Alpine).\n• Cloud Platform: AWS Elastic Beanstalk (Docker Platform running on 64-bit Amazon Linux 2023).\n• Live URL: ${BEANSTALK_URL}`);
+  addParagraph(null, `• Containerization: Application containerized via multi-stage Dockerfile (Node.js 20-slim).\n• Cloud Platform: AWS Elastic Beanstalk (Docker Platform running on 64-bit Amazon Linux 2023).\n• Live AWS URL: ${BEANSTALK_URL}`);
 
   // 6. Key Features
   addSectionHeader("6. Key Features of the Application");
@@ -100,9 +100,9 @@ function createProjectReport() {
      .font("Helvetica")
      .text("Vibe Coding & AWS Elastic Beanstalk Deployment | IBM & Bharat Cares", 50, 60);
 
-  doc.fontSize(10)
+  doc.fontSize(9)
      .font("Helvetica-Oblique")
-     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 82);
+     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 84);
 
   let y = 130;
 
@@ -139,7 +139,7 @@ function createProjectReport() {
     "• Frontend: React 19, Vite, Tailwind CSS v4, Motion animations, Lucide React icons.\n" +
     "• Backend: Node.js 20, Express.js framework, Esbuild bundler, Mammoth document parser.\n" +
     "• AI Model: Google Gemini 3.6 Flash (@google/genai SDK).\n" +
-    "• Containerization: Docker (multi-stage Dockerfile based on Node.js 20 Alpine).\n" +
+    "• Containerization: Docker (Dockerfile based on Node.js 20-slim, Dockerrun.aws.json v1).\n" +
     "• Cloud Infrastructure: AWS Elastic Beanstalk (Docker on 64-bit Amazon Linux 2023), Single Instance Free Tier.");
 
   // 2. Prompting Strategy
@@ -149,19 +149,20 @@ function createProjectReport() {
 
   // 3. Phase-by-Phase Development Summary
   addSectionHeader("3. Phase-by-Phase Development Summary");
-  addParagraph("Phase 1: Conceptualization & UI Design", "Designed a frosted-glass UI system with dark/light themes, responsive navigation, and tabbed workflow (Notes, Tutor, Quiz).");
-  addParagraph("Phase 2: Backend & LLM Integration", "Developed Express API endpoints (/api/simplify, /api/tutor, /api/quiz) ensuring Gemini API keys remain strictly secure on the server side.");
-  addParagraph("Phase 3: Docker Containerization", "Created a multi-stage Dockerfile packaging the full-stack app into a lightweight, isolated Docker container.");
-  addParagraph("Phase 4: AWS Elastic Beanstalk Deployment", "Launched AWS Elastic Beanstalk environment (studymate-ai-env) on Docker Platform, configuring environment variables (PORT, NODE_ENV, GEMINI_API_KEY).");
+  addParagraph("Phase 1: Design & UI System", "Implemented frosted-glass aesthetic with dark mode and mobile responsiveness.");
+  addParagraph("Phase 2: Backend & LLM Integration", "Built Express API endpoints (/api/simplify, /api/tutor, /api/quiz) ensuring Gemini API keys remain strictly secure on the server side.");
+  addParagraph("Phase 3: Docker Containerization", "Created Dockerfile packaging the full-stack app into a lightweight Docker container with POSIX Linux ZIP formatting.");
+  addParagraph("Phase 4: AWS Elastic Beanstalk Deployment", "Launched AWS Elastic Beanstalk environment (studymate-ai-prod-env) on Docker Platform with Environment Properties (PORT, NODE_ENV, GEMINI_API_KEY).");
 
   // 4. Application Architecture
   addSectionHeader("4. Application Architecture");
-  addParagraph(null, `Client Browser ──(HTTP/Port 80)──► AWS Elastic Beanstalk Load Balancer/Nginx ──► Docker Container (Node.js Express App) ──(API Key / SDK)──► Google Gemini 3.6 API\n\nLive URL: ${BEANSTALK_URL}`);
+  addParagraph(null, `Client Browser ──(HTTP/Port 80)──► AWS Elastic Beanstalk Nginx ──► Docker Container (Node.js Express App) ──(API Key / SDK)──► Google Gemini 3.6 API\n\nLive URL: ${BEANSTALK_URL}`);
 
   // 5. Challenges & Resolutions
   addSectionHeader("5. Challenges Encountered & Resolutions");
-  addParagraph("Challenge 1: Dockerization & Elastic Beanstalk Memory Optimization", "Initial container build compiled Vite and TypeScript on server during launch, leading to memory timeouts. Resolved by pre-building production dist bundle and using a lightweight Dockerfile copying dist directly.");
-  addParagraph("Challenge 2: Environment Variable Security", "Ensured API keys are never bundled in client code. Configured GEMINI_API_KEY as an AWS Elastic Beanstalk Environment Property.");
+  addParagraph("Challenge 1: Cross-Platform ZIP Path Separator Bug", "Windows zip utility generated backslash entry paths (dist\\server.cjs) causing Linux Docker COPY to fail. Resolved by building POSIX forward-slash ZIP archiver.");
+  addParagraph("Challenge 2: Dockerrun.aws.json Manifest", "Added Dockerrun.aws.json v1 manifest mapping container port 3000 to AWS Elastic Beanstalk engine.");
+  addParagraph("Challenge 3: Environment Variable Security", "Ensured API keys are never bundled in client code. Configured GEMINI_API_KEY as an AWS Elastic Beanstalk Environment Property.");
 
   // 6. Reflection
   addSectionHeader("6. Key Learnings & Reflection");
