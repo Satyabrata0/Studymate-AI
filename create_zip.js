@@ -1,35 +1,46 @@
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
+import AdmZip from 'adm-zip';
 
 console.log("Building production bundle...");
 execSync('npm run build', { stdio: 'inherit' });
 
-console.log("Packaging deployment zip bundle for AWS Elastic Beanstalk...");
+console.log("Packaging cross-platform Linux ZIP with POSIX forward slashes...");
 
-const psScript = `
-$tempFolder = "$env:TEMP\\eb-deploy-temp"
-if (Test-Path $tempFolder) { Remove-Item -Recurse -Force $tempFolder }
-New-Item -ItemType Directory -Path $tempFolder | Out-Null
+const zip = new AdmZip();
 
-Copy-Item Dockerfile "$tempFolder\\"
-Copy-Item Dockerrun.aws.json "$tempFolder\\"
-Copy-Item package.json "$tempFolder\\"
-Copy-Item package-lock.json "$tempFolder\\"
-Copy-Item tsconfig.json "$tempFolder\\"
-Copy-Item -Recurse dist "$tempFolder\\dist"
-Copy-Item -Recurse backend "$tempFolder\\backend" -Exclude "node_modules"
-Copy-Item -Recurse frontend "$tempFolder\\frontend" -Exclude "node_modules"
+function addFolderRecursively(localDir, zipDir) {
+  const items = fs.readdirSync(localDir);
+  for (const item of items) {
+    if (item === 'node_modules' || item === '.git' || item === 'studymate-ai-deploy.zip' || item.endsWith('.env')) continue;
+    const localPath = path.join(localDir, item);
+    const zipPath = `${zipDir}/${item}`;
+    const stat = fs.statSync(localPath);
 
-if (Test-Path "$tempFolder\\frontend\\node_modules") { Remove-Item -Recurse -Force "$tempFolder\\frontend\\node_modules" }
-if (Test-Path "$tempFolder\\backend\\node_modules") { Remove-Item -Recurse -Force "$tempFolder\\backend\\node_modules" }
+    if (stat.isDirectory()) {
+      addFolderRecursively(localPath, zipPath);
+    } else {
+      const buffer = fs.readFileSync(localPath);
+      zip.addFile(zipPath, buffer);
+    }
+  }
+}
 
-Compress-Archive -Path "$tempFolder\\*" -DestinationPath studymate-ai-deploy.zip -Force
-Remove-Item -Recurse -Force $tempFolder
-`;
+// Add root files
+const rootFiles = ['Dockerfile', 'Dockerrun.aws.json', 'package.json', 'package-lock.json', 'tsconfig.json'];
+rootFiles.forEach(file => {
+  if (fs.existsSync(file)) {
+    zip.addLocalFile(file);
+  }
+});
 
-fs.writeFileSync('make_zip.ps1', psScript);
-execSync('powershell -ExecutionPolicy Bypass -File make_zip.ps1', { stdio: 'inherit' });
-fs.unlinkSync('make_zip.ps1');
+// Add folders with Linux forward slash formatting
+['dist', 'frontend', 'backend'].forEach(folder => {
+  if (fs.existsSync(folder)) {
+    addFolderRecursively(folder, folder);
+  }
+});
 
-console.log("Clean Elastic Beanstalk zip package created successfully!");
+zip.writeZip('studymate-ai-deploy.zip');
+console.log("POSIX Linux ZIP archive created successfully!");
