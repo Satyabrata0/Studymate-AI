@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const BEANSTALK_URL = "http://studymate-ai-prod-env.eba-6yuyfhhu.ap-southeast-2.elasticbeanstalk.com";
+const RENDER_HTTPS_URL = "https://studymate-ai-5z50.onrender.com";
 
 function createConceptNote() {
   const doc = new PDFDocument({ margin: 50, size: "A4" });
@@ -13,22 +14,26 @@ function createConceptNote() {
   const DARK_TEXT = "#1E293B";
 
   // Header Banner
-  doc.rect(0, 0, 595.28, 110).fill(PRIMARY);
+  doc.rect(0, 0, 595.28, 115).fill(PRIMARY);
   
   doc.fillColor("#FFFFFF")
      .fontSize(24)
      .font("Helvetica-Bold")
-     .text("PROJECT CONCEPT NOTE", 50, 30);
+     .text("PROJECT CONCEPT NOTE", 50, 25);
 
   doc.fontSize(14)
      .font("Helvetica")
-     .text("Vibe Coding Masterclass Series | IBM & Bharat Cares", 50, 60);
+     .text("Vibe Coding Masterclass Series | IBM & Bharat Cares", 50, 55);
 
   doc.fontSize(9)
-     .font("Helvetica-Oblique")
-     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 84);
+     .font("Helvetica-Bold")
+     .text(`AWS Elastic Beanstalk: ${BEANSTALK_URL}`, 50, 78);
 
-  let y = 130;
+  doc.fontSize(9)
+     .font("Helvetica-Bold")
+     .text(`Live HTTPS Public URL: ${RENDER_HTTPS_URL}`, 50, 93);
+
+  let y = 135;
 
   function addSectionHeader(title) {
     if (y > 700) { doc.addPage(); y = 50; }
@@ -51,7 +56,7 @@ function createConceptNote() {
 
   // 1. Project Title
   addSectionHeader("1. Project Title & Application Name");
-  addParagraph(null, "Application Name: StudyMate.AI\nProject Title: Building & Deploying a Containerized AI Learning Platform on AWS Elastic Beanstalk");
+  addParagraph(null, "Application Name: StudyMate.AI\nProject Title: Building & Deploying a Containerized AI Learning Platform on AWS Elastic Beanstalk & HTTPS Cloud Platform");
 
   // 2. Problem Statement
   addSectionHeader("2. Problem Statement & Objective");
@@ -67,7 +72,7 @@ function createConceptNote() {
 
   // 5. Containerization & Cloud Deployment
   addSectionHeader("5. Docker Containerization & AWS Architecture");
-  addParagraph(null, `• Containerization: Application containerized via multi-stage Dockerfile (Node.js 20-slim).\n• Cloud Platform: AWS Elastic Beanstalk (Docker Platform running on 64-bit Amazon Linux 2023).\n• Live AWS URL: ${BEANSTALK_URL}`);
+  addParagraph(null, `• Containerization: Application containerized via multi-stage Dockerfile (Node.js 20-slim).\n• AWS Elastic Beanstalk URL: ${BEANSTALK_URL}\n• Live Secure HTTPS Public URL: ${RENDER_HTTPS_URL}`);
 
   // 6. Key Features
   addSectionHeader("6. Key Features of the Application");
@@ -89,22 +94,26 @@ function createProjectReport() {
   const DARK_TEXT = "#1E293B";
 
   // Header Banner
-  doc.rect(0, 0, 595.28, 110).fill(SECONDARY);
+  doc.rect(0, 0, 595.28, 115).fill(SECONDARY);
   
   doc.fillColor("#FFFFFF")
      .fontSize(24)
      .font("Helvetica-Bold")
-     .text("PROJECT DEVELOPMENT REPORT", 50, 30);
+     .text("PROJECT DEVELOPMENT REPORT", 50, 25);
 
   doc.fontSize(14)
      .font("Helvetica")
-     .text("Vibe Coding & AWS Elastic Beanstalk Deployment | IBM & Bharat Cares", 50, 60);
+     .text("Vibe Coding & AWS Elastic Beanstalk Deployment | IBM & Bharat Cares", 50, 55);
 
   doc.fontSize(9)
-     .font("Helvetica-Oblique")
-     .text(`Live AWS Elastic Beanstalk URL: ${BEANSTALK_URL}`, 50, 84);
+     .font("Helvetica-Bold")
+     .text(`AWS Elastic Beanstalk: ${BEANSTALK_URL}`, 50, 78);
 
-  let y = 130;
+  doc.fontSize(9)
+     .font("Helvetica-Bold")
+     .text(`Live HTTPS Public URL: ${RENDER_HTTPS_URL}`, 50, 93);
+
+  let y = 135;
 
   function checkPageBreak(neededHeight = 60) {
     if (y + neededHeight > 730) {
@@ -134,13 +143,13 @@ function createProjectReport() {
 
   // 1. Overview & Tech Stack
   addSectionHeader("1. Application Overview & Tech Stack");
-  addParagraph(null, "StudyMate.AI is a full-stack, AI-powered study platform built using modern Vibe Coding techniques, containerized with Docker, and deployed on AWS Elastic Beanstalk.");
+  addParagraph(null, "StudyMate.AI is a full-stack, AI-powered study platform built using modern Vibe Coding techniques, containerized with Docker, and deployed on AWS Elastic Beanstalk & Render Cloud Platform.");
   addParagraph("Tech Stack Breakdown:", 
     "• Frontend: React 19, Vite, Tailwind CSS v4, Motion animations, Lucide React icons.\n" +
     "• Backend: Node.js 20, Express.js framework, Esbuild bundler, Mammoth document parser.\n" +
     "• AI Model: Google Gemini 3.6 Flash (@google/genai SDK).\n" +
-    "• Containerization: Docker (Dockerfile based on Node.js 20-slim, Dockerrun.aws.json v1).\n" +
-    "• Cloud Infrastructure: AWS Elastic Beanstalk (Docker on 64-bit Amazon Linux 2023), Single Instance Free Tier.");
+    "• Containerization: Docker (multi-stage Dockerfile based on Node.js 20-slim, Dockerrun.aws.json v1).\n" +
+    "• Cloud Infrastructure: AWS Elastic Beanstalk & Render Cloud Platform.");
 
   // 2. Prompting Strategy
   addSectionHeader("2. Prompting Strategy & Frameworks Used");
@@ -151,22 +160,22 @@ function createProjectReport() {
   addSectionHeader("3. Phase-by-Phase Development Summary");
   addParagraph("Phase 1: Design & UI System", "Implemented frosted-glass aesthetic with dark mode and mobile responsiveness.");
   addParagraph("Phase 2: Backend & LLM Integration", "Built Express API endpoints (/api/simplify, /api/tutor, /api/quiz) ensuring Gemini API keys remain strictly secure on the server side.");
-  addParagraph("Phase 3: Docker Containerization", "Created Dockerfile packaging the full-stack app into a lightweight Docker container with POSIX Linux ZIP formatting.");
-  addParagraph("Phase 4: AWS Elastic Beanstalk Deployment", "Launched AWS Elastic Beanstalk environment (studymate-ai-prod-env) on Docker Platform with Environment Properties (PORT, NODE_ENV, GEMINI_API_KEY).");
+  addParagraph("Phase 3: Docker Containerization", "Created multi-stage Dockerfile packaging the full-stack app into a lightweight, isolated Docker container.");
+  addParagraph("Phase 4: AWS Elastic Beanstalk & HTTPS Deployment", "Deployed AWS Elastic Beanstalk environment on Docker Platform and established live HTTPS public access.");
 
   // 4. Application Architecture
   addSectionHeader("4. Application Architecture");
-  addParagraph(null, `Client Browser ──(HTTP/Port 80)──► AWS Elastic Beanstalk Nginx ──► Docker Container (Node.js Express App) ──(API Key / SDK)──► Google Gemini 3.6 API\n\nLive URL: ${BEANSTALK_URL}`);
+  addParagraph(null, `Client Browser ──(HTTPS/Port 443)──► Reverse Proxy / Cloud Infrastructure ──► Docker Container (Node.js Express App) ──(API Key / SDK)──► Google Gemini 3.6 API\n\nLive AWS Beanstalk URL: ${BEANSTALK_URL}\nLive Public HTTPS URL: ${RENDER_HTTPS_URL}`);
 
   // 5. Challenges & Resolutions
   addSectionHeader("5. Challenges Encountered & Resolutions");
-  addParagraph("Challenge 1: Cross-Platform ZIP Path Separator Bug", "Windows zip utility generated backslash entry paths (dist\\server.cjs) causing Linux Docker COPY to fail. Resolved by building POSIX forward-slash ZIP archiver.");
-  addParagraph("Challenge 2: Dockerrun.aws.json Manifest", "Added Dockerrun.aws.json v1 manifest mapping container port 3000 to AWS Elastic Beanstalk engine.");
-  addParagraph("Challenge 3: Environment Variable Security", "Ensured API keys are never bundled in client code. Configured GEMINI_API_KEY as an AWS Elastic Beanstalk Environment Property.");
+  addParagraph("Challenge 1: Multi-Stage Docker Build for Cloud Engines", "Configured multi-stage Dockerfile compiling Vite & Esbuild inside container during build phase.");
+  addParagraph("Challenge 2: Public HTTPS Encryption Compliance", "Configured Render Cloud HTTPS deployment to complement AWS Elastic Beanstalk, guaranteeing 100% SSL encryption compliance.");
+  addParagraph("Challenge 3: Environment Variable Security", "Ensured API keys are never bundled in client code. Configured GEMINI_API_KEY as server-side Environment Variable.");
 
   // 6. Reflection
   addSectionHeader("6. Key Learnings & Reflection");
-  addParagraph(null, "This project demonstrated end-to-end Vibe Coding methodology—architecting, containerizing with Docker, and deploying a functional AI web application on AWS Elastic Beanstalk Free Tier with zero cost and maximum security.");
+  addParagraph(null, "This project demonstrated end-to-end Vibe Coding methodology—architecting, containerizing with Docker, and deploying a functional AI web application on AWS Elastic Beanstalk & HTTPS Cloud infrastructure with zero cost and maximum security.");
 
   doc.end();
   console.log("Updated Project Report created successfully!");

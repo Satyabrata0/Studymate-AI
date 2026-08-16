@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const BEANSTALK_URL = "http://studymate-ai-prod-env.eba-6yuyfhhu.ap-southeast-2.elasticbeanstalk.com";
+const RENDER_HTTPS_URL = "https://studymate-ai-5z50.onrender.com";
 
 function createMasterPDF() {
   const doc = new PDFDocument({ margin: 50, size: "A4" });
@@ -19,35 +20,53 @@ function createMasterPDF() {
   doc.fillColor("#FFFFFF")
      .fontSize(32)
      .font("Helvetica-Bold")
-     .text("StudyMate.AI", 50, 220, { align: "center" });
+     .text("StudyMate.AI", 50, 160, { align: "center" });
 
   doc.fillColor("#A5B4FC")
-     .fontSize(16)
+     .fontSize(15)
      .font("Helvetica")
-     .text("Vibe Coding: Building & Deploying an AI Web Application on AWS", 50, 270, { align: "center", width: 495 });
+     .text("Vibe Coding: Building & Deploying a Containerized AI Web App", 50, 210, { align: "center", width: 495 });
 
-  doc.fillColor("#E2E8F0")
-     .fontSize(12)
+  doc.fillColor("#CBD5E1")
+     .fontSize(11)
      .font("Helvetica-Oblique")
-     .text("Containerized Docker Application & AWS Elastic Beanstalk Report", 50, 320, { align: "center" });
+     .text("Docker Containerization, AWS Elastic Beanstalk & HTTPS Report", 50, 255, { align: "center" });
 
-  doc.rect(40, 380, 515, 90).fillOpacity(0.15).fill("#FFFFFF").strokeOpacity(0.3).stroke("#A5B4FC");
+  // BOX 1: AWS ELASTIC BEANSTALK URL
+  doc.rect(40, 310, 515, 75).fill("#1E293B").stroke("#38BDF8");
   
   doc.fillColor("#38BDF8")
      .fontSize(11)
      .font("Helvetica-Bold")
-     .text("LIVE AWS ELASTIC BEANSTALK PUBLIC URL:", 50, 400, { align: "center" });
+     .text("LIVE AWS ELASTIC BEANSTALK DEPLOYMENT (DOCKER):", 50, 325, { align: "center" });
 
   doc.fillColor("#FFFFFF")
      .fontSize(10)
      .font("Helvetica-Bold")
-     .text(BEANSTALK_URL, 45, 425, { align: "center", width: 505 });
+     .text(BEANSTALK_URL, 45, 348, { align: "center", width: 505 });
 
-  doc.fillColor("#94A3B8")
+  // BOX 2: RENDER PUBLIC HTTPS URL
+  doc.rect(40, 410, 515, 75).fill("#1E293B").stroke("#4ADE80");
+
+  doc.fillColor("#4ADE80")
+     .fontSize(11)
+     .font("Helvetica-Bold")
+     .text("LIVE SECURE HTTPS PUBLIC URL (DOCKER):", 50, 425, { align: "center" });
+
+  doc.fillColor("#FFFFFF")
+     .fontSize(11)
+     .font("Helvetica-Bold")
+     .text(RENDER_HTTPS_URL, 45, 448, { align: "center", width: 505 });
+
+  // FOOTER DETAILS
+  doc.fillColor("#F8FAFC")
+     .fontSize(10)
+     .font("Helvetica-Bold")
+     .text("Submitted for: Vibe Coding Masterclass Series", 50, 690, { align: "center" });
+  doc.fillColor("#E2E8F0")
      .fontSize(10)
      .font("Helvetica")
-     .text("Submitted for: Vibe Coding Masterclass Series", 50, 700, { align: "center" });
-  doc.text("Organization: IBM & Bharat Cares", 50, 715, { align: "center" });
+     .text("Organization: IBM & Bharat Cares", 50, 710, { align: "center" });
 
   // PAGE 2: CONCEPT NOTE
   doc.addPage({ margin: 50, size: "A4" });
@@ -77,7 +96,7 @@ function createMasterPDF() {
   }
 
   addHeader("1. Project Title & Application Name");
-  addBlock(null, `• Application Name: StudyMate.AI\n• Project Title: Containerized AI Learning Assistant on AWS Elastic Beanstalk`);
+  addBlock(null, `• Application Name: StudyMate.AI\n• Project Title: Containerized AI Learning Assistant on AWS Elastic Beanstalk & HTTPS Cloud Platform`);
 
   addHeader("2. Problem Statement & Objective");
   addBlock(null, "Students and researchers face cognitive overload when synthesizing dense study material. StudyMate.AI simplifies notes into ELI5 summaries, answers real-time queries via an AI tutor, and auto-generates MCQ practice quizzes.");
@@ -88,8 +107,8 @@ function createMasterPDF() {
   addHeader("4. LLM Model & API Integration");
   addBlock(null, "• LLM Engine: Google Gemini 3.6 Flash\n• API Integration: @google/genai Node.js SDK via secure Express.js backend endpoints.");
 
-  addHeader("5. Docker Containerization & AWS Platform");
-  addBlock(null, `• Containerization: Built using multi-stage Dockerfile (Node.js 20-slim, Dockerrun.aws.json v1).\n• Cloud Platform: AWS Elastic Beanstalk (Docker on 64-bit Amazon Linux 2023).\n• Live Public URL: ${BEANSTALK_URL}`);
+  addHeader("5. Docker Containerization & Live URLs");
+  addBlock(null, `• Containerization: Built using multi-stage Dockerfile (Node.js 20-slim, Dockerrun.aws.json v1).\n• AWS Elastic Beanstalk URL: ${BEANSTALK_URL}\n• Live Secure HTTPS Public URL: ${RENDER_HTTPS_URL}`);
 
   // PAGE 3: PROJECT REPORT
   doc.addPage({ margin: 50, size: "A4" });
@@ -108,20 +127,18 @@ function createMasterPDF() {
   }
 
   addHeader2("1. Tech Stack Overview");
-  addBlock(null, "• Frontend: React 19, Vite, Tailwind CSS v4, Lucide Icons, Motion.\n• Backend: Node.js 20, Express.js, Esbuild, Mammoth parser.\n• AI Engine: Google Gemini 3.6 Flash (@google/genai SDK).\n• Containerization: Docker (Dockerfile based on Node.js 20-slim, Dockerrun.aws.json).\n• Cloud: AWS Elastic Beanstalk (Docker on 64-bit Amazon Linux 2023).");
+  addBlock(null, "• Frontend: React 19, Vite, Tailwind CSS v4, Lucide Icons, Motion.\n• Backend: Node.js 20, Express.js, Esbuild, Mammoth parser.\n• AI Engine: Google Gemini 3.6 Flash (@google/genai SDK).\n• Containerization: Multi-stage Dockerfile (Node.js 20-slim), Dockerrun.aws.json.\n• Deployments: AWS Elastic Beanstalk & Render Cloud Platform.");
 
   addHeader2("2. Prompting Strategy & Frameworks");
   addBlock("Persona Prompting", "Configured AI with 'Expert Academic Exam Tutor' persona for clear, structured, encouraging responses.");
   addBlock("JSON Schema Output", "Enforced rigid JSON schema for Quiz Generation [{ id, question, options, correctIndex, explanation }].");
 
-  addHeader2("3. Development Phases");
-  addBlock("Phase 1: Design & UI System", "Implemented frosted-glass aesthetic with dark mode and mobile responsiveness.");
-  addBlock("Phase 2: Backend API Development", "Built Express endpoints keeping Gemini API keys securely on server side.");
-  addBlock("Phase 3: Docker Containerization", "Created Dockerfile & Dockerrun.aws.json packaging the full-stack app into a lightweight Docker container.");
-  addBlock("Phase 4: AWS Elastic Beanstalk Deployment", "Launched AWS Elastic Beanstalk environment on Docker Platform with Environment Properties (PORT, NODE_ENV, GEMINI_API_KEY).");
+  addHeader2("3. Live Deployment URLs");
+  addBlock("AWS Elastic Beanstalk Docker URL", BEANSTALK_URL);
+  addBlock("Secure HTTPS Public URL (SSL Encrypted)", RENDER_HTTPS_URL);
 
   addHeader2("4. Reflections & Conclusion");
-  addBlock(null, "Demonstrated end-to-end Vibe Coding methodology—architecting, containerizing with Docker, and deploying a functional AI web application on AWS Elastic Beanstalk Free Tier with zero cost and maximum security.");
+  addBlock(null, "Demonstrated end-to-end Vibe Coding methodology—architecting, containerizing with Docker, and deploying a functional AI web application on AWS Elastic Beanstalk and HTTPS Cloud infrastructure with zero cost and maximum security.");
 
   doc.end();
   console.log("Updated Master Submission PDF created successfully!");
