@@ -29,7 +29,7 @@ StudyMate AI is a clean, production-ready AI-powered study assistant built with 
    npm install
    ```
 
-2. **Configure Environment Variables**
+2. **Configure Environment Variables**/
    Create a `.env` file or export the key:
    ```env
    GEMINI_API_KEY=your_gemini_api_key_here
